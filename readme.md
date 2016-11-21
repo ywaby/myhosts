@@ -10,6 +10,9 @@ nodejs      |
 java        |
 c#          |
 
+1. 写入host，dns cache
+2. googlevideo
+3. 匹配域名
 
 ## 功能
 
@@ -20,8 +23,16 @@ c#          |
 - 打开host路径
 - 获得ip
 - host编辑
-
+- 模式切换
+- 动作编辑
 
 ## roadmap
+参数
+-v6 
+-v4 
+-link
+-backup path
+-base host path
+
 命令行
 UI
