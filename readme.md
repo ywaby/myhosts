@@ -33,6 +33,10 @@ c#          |
 -link
 -backup path
 -base host path
+-i 
+link
+host path
+back path
 
 命令行
 UI
