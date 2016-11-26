@@ -14,7 +14,7 @@ class Configure():
     #default path to backup,save to current path if not set
     backup_path = r'E:\develop_space\myhost\test'
 
-from .myhosts import ActionBase
+from .action import ActionBase
 
 class Actions(ActionBase):
     def default(self):
