@@ -7,3 +7,5 @@ myhosts is hosts manager tool , a python tool,
 - UI
 - pip
 - doc
+- setup.py
+- ...
