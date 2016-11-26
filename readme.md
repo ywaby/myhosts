@@ -27,16 +27,8 @@ c#          |
 - 动作编辑
 
 ## roadmap
-参数
--v6 
--v4 
--link
--backup path
--base host path
--i 
-link
-host path
-back path
-
-命令行
+linux
 UI
+pip
+doc
+timeout https
