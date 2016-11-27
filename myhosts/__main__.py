@@ -6,11 +6,11 @@ from . import configure
 def main():
     import argparse
     parser = argparse.ArgumentParser(prog='myhosts',
-                                     description='update hosts from github',
-                                     epilog="project at: www.github.ywaby.pytk.com")
+                                     description='a hosts manager tool',
+                                     epilog="project at: www.github.ywaby.myhosts.com")
 
-    parser.add_argument('-v', "--version", help="print version",action='version', version='%(prog)s 0.0.1')
-    parser.add_argument('-i', "--info", help="show info", action='store_true')
+    parser.add_argument('-v', "--version", help="print myhosts version",action='version', version='%(prog)s 0.0.1')
+    parser.add_argument('-i', "--info", help="show myhosts refence info", action='store_true')
     parser.add_argument('action', nargs='?', default='default', help="action to run,default to run if no set")
     args = parser.parse_args()
     if args.info:
