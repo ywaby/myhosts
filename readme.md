@@ -1,12 +1,14 @@
 myhosts is a hosts manager tool , a python tool.
 myhosts, 
 ## license 
-myhosts under [LGPL-v3](.LICENSE)
+project is under [LGPL-v3](./LICENSE)
 ## usage
 ### install
+from pip
 ```
 pip install myhosts
 ```
+from source code
 ```
 python setup.py install
 ```
