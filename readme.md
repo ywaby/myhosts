@@ -1,5 +1,4 @@
 myhosts is a hosts manager tool , a python tool.
-myhosts, 
 ## license 
 project is under [LGPL-v3](./LICENSE)
 ## usage
@@ -24,7 +23,7 @@ pip uninstall myhosts
 ```
 ### usage
 ```
-python -m myhosts [argv]
+python -m myhosts action
 ```
 ```
 usage: myhosts [-h] [-v] [-i] [action]
@@ -42,17 +41,20 @@ find configure.py path
 ```
 python -m myhosts -i
 ```
-```
+```py
 class Configure():
     '''configure of myhost'''
+    # set proxy
     proxy = {
         "http": "127.0.0.1:8087",
         "https": "127.0.0.1:8087"
     }
+    # set remote hosts link
     remote_hosts = {
         'ipv6_hosts': 'https://github.com/lennylxx/ipv6-hosts',
         'ipv4_hosts': 'https://raw.githubusercontent.com/racaljk/hosts/master/hosts'
     }
+    # set local hosts path
     local_hosts = {
         'hostsin': r'E:\develop_space\myhost\test\hostsin'# hosts path
     }
@@ -60,6 +62,7 @@ class Configure():
     backup_path = r'E:\develop_space\myhost\test'
 
 class Actions(ActionBase):
+'''define action to run '''
     def default(self):
         '''default action, must exist'''
         self.backup()
