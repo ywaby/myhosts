@@ -46,7 +46,7 @@ python -m myhosts -i
 ```py
 class Configure():
     '''configure of myhost'''
-    # set proxy
+    # set proxy,if not use proxy,do not set it
     proxy = {
         "http": "127.0.0.1:8087",
         "https": "127.0.0.1:8087"
@@ -60,7 +60,7 @@ class Configure():
     local_hosts = {
         'hostsin': r'E:\develop_space\myhost\test\hostsin'# hosts path
     }
-    #default path to backup,save to current path if not set
+    # default path to backup,save to current path if not set
     backup_path = r'E:\develop_space\myhost\test'
 
 class Actions(ActionBase):

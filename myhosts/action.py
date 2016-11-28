@@ -25,6 +25,7 @@ class ActionBase():
         return data
 
     def update(self, *sources):
+        '''update system hosts from sources'''
         data=b''
         for type,src in sources:
             if type == 'local_hosts':
@@ -65,7 +66,7 @@ class ActionBase():
         print('finish hosts update')
 
     def backup(self, path=None, name=None):
-        '''backup system hosts file to path'''
+        '''backup system hosts to path'''
         import shutil
         import time
         if not path:
