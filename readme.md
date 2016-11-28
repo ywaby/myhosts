@@ -25,7 +25,8 @@ pip uninstall myhosts
 ```
 ### usage
 ```
-python -m myhosts action
+myhosts action
+myhosts argv
 ```
 ```
 usage: myhosts [-h] [-v] [-i] [action]
