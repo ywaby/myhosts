@@ -1,6 +1,8 @@
-myhosts is a hosts manager tool , a python tool.
+myhosts is a hosts manager tool write with python.
+myhosts can updata hosts from remote & local.
+myhosts can be used to switch hosts between diffrent scene.
 ## license 
-project is under [LGPL-v3](./LICENSE)
+project is under [LGPL-3.0](./LICENSE)
 ## usage
 ### install
 from pip

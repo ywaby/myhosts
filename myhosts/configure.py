@@ -9,10 +9,10 @@ class Configure():
         'ipv4_hosts': 'https://raw.githubusercontent.com/racaljk/hosts/master/hosts'
     }
     local_hosts = {
-        'hostsin': r'E:\develop_space\myhost\test\hostsin'# hosts path
+        'hostsin': r'E:\develop_space\myhosts\test\hostsin'# hosts path
     }
     #default path to backup,save to current path if not set
-    backup_path = r'E:\develop_space\myhost\test'
+    backup_path = r'E:\develop_space\myhosts\test'
 
 from .action import ActionBase
 
@@ -26,7 +26,7 @@ class Actions(ActionBase):
 
     def test(self):
         '''test action'''
-        self.backup()
+        # self.backup()
         self.update(
             ('remote_hosts', 'ipv4_hosts'),
             ('local_hosts', 'hostsin')

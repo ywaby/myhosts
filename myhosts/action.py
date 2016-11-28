@@ -20,7 +20,7 @@ class ActionBase():
             elif src.startswith('http://')and Configure.proxy.get('https'):
                 req.set_proxy(Configure.proxy['http'], 'http')
                 req.set_proxy(Configure.proxy['http'], 'http')
-        response = urlrequest.urlopen(req,timeout=10)
+        response = urlrequest.urlopen(req, timeout=20)
         data = response.read()
         return data
 
@@ -71,7 +71,7 @@ class ActionBase():
         if not path:
             path = Configure.backup_path if hasattr(Configure, 'backup_path') else ''
         if not name:
-            name = "host " + time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())
+            name = "hosts" + time.strftime(" %Y-%m-%d %H-%M-%S", time.localtime())
         backup_path = os.path.join(path, name)
         if platform.system() == 'Windows':
             sys_root_path = os.getenv("SystemRoot")
