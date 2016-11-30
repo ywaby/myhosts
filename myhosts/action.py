@@ -5,15 +5,17 @@ from .configure import Configure
 
 class ActionBase():
     '''action base class'''
-    def get_local_hosts(self, src):
-        f = open(src, mode='rb')
-        data=f.read()
-        f.close()
+    @staticmethod
+    def get_local_hosts(src):
+        hosts_file = open(src, mode='rb')
+        data = hosts_file.read()
+        hosts_file.close()
         return data
 
-    def get_remote_hosts(self, src):
+    @staticmethod
+    def get_remote_hosts(src):
         req = urlrequest.Request(src)
-        if hasattr(Configure,'proxy'):
+        if hasattr(Configure, 'proxy'):
             if src.startswith('https://') and Configure.proxy.get('https'):
                 req.set_proxy(Configure.proxy['https'], 'https')
                 req.set_proxy(Configure.proxy['https'], 'https')
@@ -26,31 +28,31 @@ class ActionBase():
 
     def update(self, *sources):
         '''update system hosts from sources'''
-        data=b''
-        for type,src in sources:
-            if type == 'local_hosts':
+        data = b''
+        for hosts_type, src in sources:
+            if hosts_type == 'local_hosts':
                 src_path = Configure.local_hosts.get(src)
                 if not src_path:
-                    raise Exception('action (%s,%s) can not found'%(type, src))
+                    raise Exception('action (%s,%s) can not found'%(hosts_type, src))
                 if not os.path.isfile(src_path):
                     raise Exception('file(%s) can not found'%(src_path))
-                data += ('\n%s->%s START\n'%(type, src)).encode('utf-8')
+                data += ('\n%s->%s START\n'%(hosts_type, src)).encode('utf-8')
                 data += self.get_local_hosts(src_path)
-                data += ('\n%s->%s END\n'%(type, src)).encode('utf-8')
-            elif type == 'remote_hosts':
+                data += ('\n%s->%s END\n'%(hosts_type, src)).encode('utf-8')
+            elif hosts_type == 'remote_hosts':
                 src_link = Configure.remote_hosts.get(src)
                 if not src_link:
-                    raise Exception('action (%s,%s) can not found'%(type, src))
-                print('%s->%s downloading...'%(type,src))
-                data += ('\n%s->%s START\n'%(type, src)).encode('utf-8')
+                    raise Exception('action (%s,%s) can not found'%(hosts_type, src))
+                print('%s->%s downloading...'%(hosts_type, src))
+                data += ('\n%s->%s START\n'%(hosts_type, src)).encode('utf-8')
                 data += self.get_remote_hosts(src_link)
-                data += ('\n%s->%s END\n'%(type, src)).encode('utf-8')
+                data += ('\n%s->%s END\n'%(hosts_type, src)).encode('utf-8')
             else:
-                raise Exception('action source type error')
+                raise Exception('action source hosts type error')
 
         if platform.system() == 'Windows':
             sys_root_path = os.getenv("SystemRoot")
-            sys_hosts_path = os.path.join(sys_root_path, "System32\drivers\etc\hosts")
+            sys_hosts_path = os.path.join(sys_root_path, r"System32\drivers\etc\hosts")
             sys_hosts = open(sys_hosts_path, mode='wb+')
             sys_hosts.write(data)
             sys_hosts.close()
@@ -76,7 +78,7 @@ class ActionBase():
         backup_path = os.path.join(path, name)
         if platform.system() == 'Windows':
             sys_root_path = os.getenv("SystemRoot")
-            sys_hosts_path = os.path.join(sys_root_path, "System32\drivers\etc\hosts")
+            sys_hosts_path = os.path.join(sys_root_path, r"System32\drivers\etc\hosts")
             shutil.copyfile(sys_hosts_path, backup_path)
         elif platform.system() == "Linux":
             sys_hosts_path = '/etc/hosts'
