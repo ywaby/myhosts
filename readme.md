@@ -42,7 +42,7 @@ optional arguments:
 ### configure
 find configure.py path
 ```
-python -m myhosts -i
+myhosts -i
 ```
 ```py
 class Configure():
@@ -65,7 +65,7 @@ class Configure():
     backup_path = r'E:\develop_space\myhost\test'
 
 class Actions(ActionBase):
-'''define action to run '''
+    '''define action to run '''
     def default(self):
         '''default action, must exist'''
         self.backup()
