@@ -3,6 +3,7 @@ import os
 from . import configure
 
 def main():
+    """Run the myhosts command line"""
     import argparse
     parser = argparse.ArgumentParser(prog='myhosts',
                                      description='a hosts manager tool',

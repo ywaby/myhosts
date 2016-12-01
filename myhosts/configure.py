@@ -16,7 +16,8 @@ class Configure():
         # 'hosts name': 'path'
     }
     # default path to backup,save to current path if not set
-    backup_path = '' # backup_path = 'path'
+    # backup_path = 'path'
+    backup_path = ''
 
 from .action import ActionBase
 class Actions(ActionBase):

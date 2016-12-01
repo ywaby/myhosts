@@ -1,4 +1,4 @@
-myhosts is a hosts manager tool write with python.
+myhosts is a hosts manager tool write with python3.
 myhosts can updata hosts from remote & local.
 myhosts can be used to switch hosts between diffrent scene.
 ## license 
@@ -24,7 +24,8 @@ pip upgrade myhosts
 pip uninstall myhosts
 ```
 ### usage
-```
+```shell
+# use under su,if need to update system hosts
 myhosts action
 myhosts argv
 ```
