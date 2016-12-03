@@ -29,7 +29,7 @@ pip uninstall myhosts
 myhosts action
 myhosts argv
 ```
-```
+```shell
 usage: myhosts [-h] [-v] [-i] [action]
 
 positional arguments:
@@ -42,7 +42,7 @@ optional arguments:
 ```
 ### configure
 find configure.py path
-```
+```shell
 myhosts -i
 ```
 ```py
@@ -82,12 +82,8 @@ class Actions(ActionBase):
             ('local_hosts', 'hostsin')
         )
 ```
-
 ## roadmap
-- linux test
+- linux/mac test
 - pip
-- doc
-- setup.py
 - auto test,build
-- ...
-- UI
+- info of hosts(update time)
