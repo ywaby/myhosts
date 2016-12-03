@@ -19,6 +19,7 @@ python setup.py install
 ```shell
 pip upgrade myhosts
 ```
+3. recover configure.py with backup
 ### uninstall
 ```shell
 pip uninstall myhosts
@@ -87,3 +88,4 @@ class Actions(ActionBase):
 - pip
 - auto test,build
 - info of hosts(update time)
+- upgrade
