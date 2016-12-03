@@ -6,21 +6,21 @@ project is under [LGPL-3.0](./LICENSE)
 ## usage
 ### install
 from pip
-```
+```shell
 pip install myhosts
 ```
 from source code
-```
+```shell
 python setup.py install
 ```
 ### upgrade
 1. backup configure.py
 2. upgrade myhosts
-```
+```shell
 pip upgrade myhosts
 ```
 ### uninstall
-```
+```shell
 pip uninstall myhosts
 ```
 ### usage
