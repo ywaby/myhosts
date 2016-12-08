@@ -22,7 +22,9 @@ class ActionBase():
             elif src.startswith('http://')and Configure.proxy.get('https'):
                 req.set_proxy(Configure.proxy['http'], 'http')
                 req.set_proxy(Configure.proxy['http'], 'http')
-        response = urlrequest.urlopen(req, timeout=20)
+        if not hasattr(Configure, 'timeout'):
+            Configure.timeout = 30
+        response = urlrequest.urlopen(req, timeout=Configure.timeout)
         data = response.read()
         return data
 
