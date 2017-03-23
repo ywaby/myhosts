@@ -38,17 +38,17 @@ class ActionBase():
                     raise Exception('action (%s,%s) can not found'%(hosts_type, src))
                 if not os.path.isfile(src_path):
                     raise Exception('file(%s) can not found'%(src_path))
-                data += ('\n%s->%s START\n'%(hosts_type, src)).encode('utf-8')
+                data += ('# %s->%s START\n'%(hosts_type, src)).encode('utf-8')
                 data += self.get_local_hosts(src_path)
-                data += ('\n%s->%s END\n'%(hosts_type, src)).encode('utf-8')
+                data += ('\n# %s->%s END\n\n'%(hosts_type, src)).encode('utf-8')
             elif hosts_type == 'remote_hosts':
                 src_link = Configure.remote_hosts.get(src)
                 if not src_link:
                     raise Exception('action (%s,%s) can not found'%(hosts_type, src))
                 print('%s->%s downloading...'%(hosts_type, src))
-                data += ('\n%s->%s START\n'%(hosts_type, src)).encode('utf-8')
+                data += ('# %s->%s START\n'%(hosts_type, src)).encode('utf-8')
                 data += self.get_remote_hosts(src_link)
-                data += ('\n%s->%s END\n'%(hosts_type, src)).encode('utf-8')
+                data += ('\n# %s->%s END\n\n'%(hosts_type, src)).encode('utf-8')
             else:
                 raise Exception('action source hosts type error')
 

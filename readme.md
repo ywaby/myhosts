@@ -1,4 +1,4 @@
-myhosts is a hosts manager tool write with python3.
+myhosts is a hosts manager tool writed by python3.
 myhosts can updata hosts from remote & local.
 myhosts can be used to switch hosts between diffrent scene.
 ## license 
@@ -42,49 +42,51 @@ optional arguments:
   -i, --info     show myhosts refence info
 ```
 ### configure
-find configure.py path
+1. find configure.py path
 ```shell
 myhosts -i
 ```
+2. modify configure
 ```py
 class Configure():
     '''configure of myhost'''
+    # remote download timeout set
+    timeout = 30 
     # set proxy,if not use proxy,do not set it
     proxy = {
-        "http": "127.0.0.1:8087",
-        "https": "127.0.0.1:8087"
+        # "http": "127.0.0.1:8087",
+        # "https": "127.0.0.1:8087"
     }
     # set remote hosts link
     remote_hosts = {
-        'ipv6_hosts': 'https://github.com/lennylxx/ipv6-hosts',
-        'ipv4_hosts': 'https://raw.githubusercontent.com/racaljk/hosts/master/hosts'
+        # 'hosts name': link
+        'ipv4 hosts': 'https://raw.githubusercontent.com/racaljk/hosts/master/hosts',
+        'ipv6 hosts': 'https://github.com/lennylxx/ipv6-hosts'
     }
     # set local hosts path
     local_hosts = {
-        'hostsin': r'E:\develop_space\myhost\test\hostsin'# hosts path
+        # 'hosts name': path
+        'github hosts': r'E:\develop_space\python\myhosts\test\github_hosts'
     }
     # default path to backup,save to current path if not set
-    backup_path = r'E:\develop_space\myhost\test'
+    backup_path = ''
 
+from .action import ActionBase
 class Actions(ActionBase):
-    '''define action to run '''
+    '''define action to run'''
     def default(self):
         '''default action, must exist'''
-        self.backup()
+        # self.backup()
         self.update(
-            ('remote_hosts', 'ipv4_hosts')
+            ('remote_hosts', 'ipv4 hosts'),
+            ('local_hosts', 'github hosts')
         )
 
-    def test(self):
-        '''test action'''
-        self.backup()
-        self.update(
-            ('remote_hosts', 'ipv4_hosts'),
-            ('local_hosts', 'hostsin')
-        )
 ```
+## android
+use qpython3
 ## roadmap
-- linux/mac test
+- linux/qpython test
 - pip
 - auto test,build
 - info of hosts(update time)

@@ -10,12 +10,13 @@ class Configure():
     # set remote hosts link
     remote_hosts = {
         # 'hosts name': link
-        'ipv4_hosts': 'https://raw.githubusercontent.com/racaljk/hosts/master/hosts',
-        'ipv6_hosts': 'https://github.com/lennylxx/ipv6-hosts'
+        'ipv4 hosts': 'https://raw.githubusercontent.com/racaljk/hosts/master/hosts',
+        'ipv6 hosts': 'https://github.com/lennylxx/ipv6-hosts'
     }
     # set local hosts path
     local_hosts = {
         # 'hosts name': path
+        'github hosts': r'E:\develop_space\python\myhosts\test\github_hosts'
     }
     # default path to backup,save to current path if not set
     backup_path = ''
@@ -25,7 +26,8 @@ class Actions(ActionBase):
     '''define action to run'''
     def default(self):
         '''default action, must exist'''
-        self.backup()
+        # self.backup()
         self.update(
-            ('remote_hosts', 'ipv4_hosts')
+            ('remote_hosts', 'ipv4 hosts'),
+            ('local_hosts', 'github hosts')
         )
