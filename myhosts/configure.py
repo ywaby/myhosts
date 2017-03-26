@@ -26,7 +26,12 @@ class Actions(ActionBase):
     '''define action to run'''
     def default(self):
         '''default action, must exist'''
-        # self.backup()
+        self.update(
+            ('remote_hosts', 'ipv4 hosts')
+        )
+    def test(self):
+        '''default action, must exist'''
+        self.backup(r"E:\develop_space\python\myhosts\test")
         self.update(
             ('remote_hosts', 'ipv4 hosts'),
             ('local_hosts', 'github hosts')

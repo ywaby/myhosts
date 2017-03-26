@@ -7,4 +7,6 @@ def install():
 def uninstall():
     os.system('pip uninstall myhosts')
 def test():
+    os.system('myhosts')
+    os.system('myhosts test')
     pass
