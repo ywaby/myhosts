@@ -1,7 +1,8 @@
+
 class Configure():
     '''configure of myhost'''
     # remote download timeout set
-    timeout = 30 
+    timeout = 30
     # set proxy,if not use proxy,do not set it
     proxy = {
         # "http": "127.0.0.1:8087",
@@ -21,18 +22,3 @@ class Configure():
     # default path to backup,save to current path if not set
     backup_path = ''
 
-from .action import ActionBase
-class Actions(ActionBase):
-    '''define action to run'''
-    def default(self):
-        '''default action, must exist'''
-        self.update(
-            ('remote_hosts', 'ipv4 hosts')
-        )
-    def test(self):
-        '''default action, must exist'''
-        self.backup(r"E:\develop_space\python\myhosts\test")
-        self.update(
-            ('remote_hosts', 'ipv4 hosts'),
-            ('local_hosts', 'github hosts')
-        )

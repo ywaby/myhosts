@@ -1,10 +1,13 @@
-myhosts is a hosts manager tool writed by python3.
-myhosts can updata hosts from remote & local.
+myhosts is a hosts manager tool writed by python3.  
+myhosts can updata hosts from remote & local.  
 myhosts can be used to switch hosts between diffrent scene.
-## license 
+
+## License 
 project is under [LGPL-3.0](./LICENSE)
-## usage
-### install
+
+## Usage
+
+### Install
 from pip
 ```shell
 pip install myhosts
@@ -13,25 +16,24 @@ from source code
 ```shell
 python setup.py install
 ```
-### upgrade
+
+### Upgrade
 1. backup configure.py
 2. upgrade myhosts
 ```shell
 pip upgrade myhosts
 ```
 3. recover configure.py with backup
-### uninstall
+
+### Uninstall
 ```shell
 pip uninstall myhosts
 ```
-### usage
+
+### Command Reference
+use under sudo, if need to change system hosts.
 ```shell
-# use under su,if need to update system hosts
-myhosts action
-myhosts argv
-```
-```shell
-usage: myhosts [-h] [-v] [-i] [action]
+usage: myhosts [-h] [-v] [-i] [-l] [action]
 
 positional arguments:
   action         action to run,default to run if no set
@@ -40,18 +42,21 @@ optional arguments:
   -h, --help     show this help message and exit
   -v, --version  print myhosts version
   -i, --info     show myhosts refence info
+  -l, --list     list all actions
 ```
-### configure
+
+### Configure
 1. find configure.py path
 ```shell
 myhosts -i
 ```
 2. modify configure
 ```py
+
 class Configure():
     '''configure of myhost'''
     # remote download timeout set
-    timeout = 30 
+    timeout = 30
     # set proxy,if not use proxy,do not set it
     proxy = {
         # "http": "127.0.0.1:8087",
@@ -71,23 +76,26 @@ class Configure():
     # default path to backup,save to current path if not set
     backup_path = ''
 
-from .action import ActionBase
-class Actions(ActionBase):
-    '''define action to run'''
-    def default(self):
-        '''default action, must exist'''
-        # self.backup()
+```
+
+### Action
+```
+class ActionName(BaseAction):
+    '''doc of action'''
+
+    def execute(self):
+        # backup hosts
+        self.backup(r"E:\develop_space\python\myhosts\test")
+        # update hosts from list
         self.update(
             ('remote_hosts', 'ipv4 hosts'),
             ('local_hosts', 'github hosts')
         )
-
 ```
-## android
-use qpython3
-## roadmap
-- linux/qpython test
-- pip
-- auto test,build
-- info of hosts(update time)
+
+## Roadmap
+
 - upgrade
+- use as import
+- linux test
+- pip
