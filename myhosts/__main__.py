@@ -28,8 +28,8 @@ class CommandLine():
                             action='store_true')
         parser.add_argument('action',
                             nargs='?',
-                            default='default',
-                            help="action to run,default to run if no set")
+                            default='Default',
+                            help="action to run,Default to run if no set")
         args = parser.parse_args()
         if args.info:
             print('configure path: %s' % os.path.dirname(configure.__file__))
