@@ -46,11 +46,12 @@ optional arguments:
 ```
 
 ### Configure
-1. find configure.py path
+find path
 ```shell
 myhosts -i
 ```
-2. modify configure
+
+configure.py 
 ```py
 
 class Configure():
@@ -79,7 +80,8 @@ class Configure():
 ```
 
 ### Action
-```
+actions.py
+```py
 class ActionName(BaseAction):
     '''doc of action'''
 
@@ -98,4 +100,5 @@ class ActionName(BaseAction):
 - upgrade
 - use as import
 - linux test
+- android test
 - pip
