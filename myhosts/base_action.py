@@ -8,17 +8,17 @@ class BaseAction():
     '''action base class'''
 
     def __init__(self):
-        self.execute()
+        self.action()
 
     @staticmethod
-    def get_local_hosts(path):
+    def _get_local_hosts(path):
         hosts_file = open(path, mode='rb')
         data = hosts_file.read()
         hosts_file.close()
         return data
 
     @staticmethod
-    def get_remote_hosts(link):
+    def _get_remote_hosts(link):
         req = urlrequest.Request(link)
         if hasattr(Configure, 'proxy'):
             if link.startswith('https://') and Configure.proxy.get('https'):
@@ -46,7 +46,7 @@ class BaseAction():
                     raise Exception('file(%s) can not found' % (src_path))
                 data += ('# %s->%s START\n' %
                          (hosts_type, src)).encode('utf-8')
-                data += self.get_local_hosts(src_path)
+                data += self._get_local_hosts(src_path)
                 data += ('\n# %s->%s END\n\n' %
                          (hosts_type, src)).encode('utf-8')
             elif hosts_type == 'remote_hosts':
@@ -54,10 +54,10 @@ class BaseAction():
                 if not src_link:
                     raise Exception('action (%s,%s) can not found' %
                                     (hosts_type, src))
-                print('%s->%s downloading...' % (hosts_type, src))
+                print('%s:%s downloading...' % (hosts_type, src))
                 data += ('# %s->%s START\n' %
                          (hosts_type, src)).encode('utf-8')
-                data += self.get_remote_hosts(src_link)
+                data += self._get_remote_hosts(src_link)
                 data += ('\n# %s->%s END\n\n' %
                          (hosts_type, src)).encode('utf-8')
             else:
@@ -76,7 +76,7 @@ class BaseAction():
             sys_hosts = open(sys_hosts_path, mode='wb')
             sys_hosts.write(data)
             sys_hosts.close()
-            os.system('rcnscd restart')
+            # linux will auto reflesh
         else:
             raise Exception('unsupport system')
         print('finish hosts update')
@@ -110,8 +110,8 @@ class BaseAction():
         import inspect
         try:
             if inspect.isclass(obj) and \
-                BaseAction in inspect.getmro(obj) and \
-                obj != BaseAction:
+               BaseAction in inspect.getmro(obj) and \
+               obj != BaseAction:
                 return True
             else:
                 return False

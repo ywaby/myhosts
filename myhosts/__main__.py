@@ -49,18 +49,17 @@ class CommandLine():
         else:
             action = getattr(actions, args.action)
             action()
-            os.system('pause')
 
     def list_actions(self):
         '''list all tasks in files'''
         for name, action in getmembers(actions, BaseAction.is_action):
-            print(name, action.__doc__, sep='\t\t')
+            print(name, " : ", action.__doc__)
             print()
 
 
 def main():
     CommandLine().prase()
-
+    return True
 
 if __name__ == '__main__':
     main()
