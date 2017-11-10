@@ -1,11 +1,10 @@
 import platform
-import os
+import os,sys
 import argparse
 from . import configure
 from . import actions
 from .base_action import BaseAction
 from inspect import getmembers
-
 
 class CommandLine():
 

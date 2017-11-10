@@ -64,7 +64,7 @@ class Configure():
     # set local hosts path
     local_hosts = {
         # 'hosts name': path
-        'github hosts': r'E:\develop_space\python\myhosts\test\github_hosts'
+        'github hosts': '/home/ywaby/文档/project/python/myhosts/test/add_hosts'
     }
     # default path to backup,save to current path if not set
     backup_path = ''

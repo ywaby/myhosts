@@ -13,6 +13,15 @@ class Default(BaseAction):
         )
 
 
+class clear(BaseAction):
+    '''
+    default action, must exist
+    '''
+
+    def action(self):
+        self.clear()
+
+
 class Test(BaseAction):
     '''
     backup->hosts=(remote ipv4 hosts+local add hosts)

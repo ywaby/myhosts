@@ -8,7 +8,18 @@ class BaseAction():
     '''action base class'''
 
     def __init__(self):
+        if platform.system() == 'Windows':
+            sys_root_path = os.getenv("SystemRoot")
+            BaseAction.hosts_path = os.path.join(
+                sys_root_path, r"System32\drivers\etc\hosts")
+        elif platform.system() == "Linux":
+            BaseAction.hosts_path = '/etc/hosts'
+        else:
+            raise Exception('unsupport system')
         self.action()
+
+    def action(self):
+        pass
 
     @staticmethod
     def _get_local_hosts(path):
@@ -62,24 +73,18 @@ class BaseAction():
                          (hosts_type, src)).encode('utf-8')
             else:
                 raise Exception('action source hosts type error')
-
+        sys_hosts = open(BaseAction.hosts_path, mode='wb+')
+        sys_hosts.write(data)
+        sys_hosts.close()
         if platform.system() == 'Windows':
-            sys_root_path = os.getenv("SystemRoot")
-            sys_hosts_path = os.path.join(
-                sys_root_path, r"System32\drivers\etc\hosts")
-            sys_hosts = open(sys_hosts_path, mode='wb+')
-            sys_hosts.write(data)
-            sys_hosts.close()
             os.system('ipconfig /flushdns')
-        elif platform.system() == "Linux":
-            sys_hosts_path = '/etc/hosts'
-            sys_hosts = open(sys_hosts_path, mode='wb')
-            sys_hosts.write(data)
-            sys_hosts.close()
-            # linux will auto reflesh
-        else:
-            raise Exception('unsupport system')
         print('finish hosts update')
+
+    def clear(self):
+        sys_hosts = open(BaseAction.hosts_path, mode='w')
+        sys_hosts.close()
+        print("finish clear hosts")
+        return
 
     def backup(self, path=None, name=None):
         '''backup system hosts to path'''
@@ -92,17 +97,8 @@ class BaseAction():
             name = "hosts" + \
                 time.strftime(" %Y-%m-%d %H-%M-%S", time.localtime())
         backup_path = os.path.join(path, name)
-        if platform.system() == 'Windows':
-            sys_root_path = os.getenv("SystemRoot")
-            sys_hosts_path = os.path.join(
-                sys_root_path, r"System32\drivers\etc\hosts")
-            shutil.copyfile(sys_hosts_path, backup_path)
-        elif platform.system() == "Linux":
-            sys_hosts_path = '/etc/hosts'
-            shutil.copyfile(sys_hosts_path, backup_path)
-        else:
-            raise Exception('unsupport system')
-        print('hosts backup:' + backup_path)
+        shutil.copyfile(BaseAction.hosts_path, backup_path)
+        print('hosts backup: ' + backup_path)
 
     @staticmethod
     def is_action(obj):
@@ -117,4 +113,3 @@ class BaseAction():
                 return False
         except:
             return False
-
