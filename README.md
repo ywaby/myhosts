@@ -3,7 +3,7 @@ myhosts can updata hosts from remote & local.
 myhosts can be used to switch hosts between diffrent scene.
 
 ## License 
-project is under [LGPL-3.0](./LICENSE)
+project is under [MIT](./LICENSE)
 
 ## Usage
 
@@ -13,12 +13,11 @@ from source code
 python setup.py install
 ```
 
-### Upgrade
-task.py -> UpgrageFromSetup
-
 ### Uninstall
-```shell
+```sh
 pip uninstall myhosts
+# remove configure file
+rm  -rf ~/config/myhosts
 ```
 
 ### Command Reference
@@ -61,7 +60,7 @@ class Configure():
         'ipv4 hosts': 'https://raw.githubusercontent.com/racaljk/hosts/master/hosts',
         'ipv6 hosts': 'https://github.com/lennylxx/ipv6-hosts'
     }
-    # set local hosts path
+    # set local hosts file path
     local_hosts = {
         # 'hosts name': path
         'github hosts': '/home/ywaby/文档/project/python/myhosts/test/add_hosts'
@@ -85,6 +84,8 @@ class ActionName(BaseAction):
             ('remote_hosts', 'ipv4 hosts'),
             ('local_hosts', 'github hosts')
         )
+        # clear hosts file
+        self.clear()
 ```
 
 ## Roadmap

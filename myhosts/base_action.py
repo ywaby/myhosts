@@ -1,7 +1,7 @@
 import platform
 import os
 from urllib import request as urlrequest
-from .configure import Configure
+from configure import Configure
 
 
 class BaseAction():

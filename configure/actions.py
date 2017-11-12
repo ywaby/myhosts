@@ -1,5 +1,5 @@
 
-from .base_action import BaseAction
+from myhosts.base_action import BaseAction
 
 
 class Default(BaseAction):
@@ -28,7 +28,7 @@ class Test(BaseAction):
     '''
 
     def action(self):
-        self.backup("E:/develop_space/python/myhosts/test/backup")
+        self.backup("/home/ywaby/文档/project/python/myhosts/test/backup")
         self.update(
             ('remote_hosts', 'ipv4 hosts'),
             ('local_hosts', 'github hosts')

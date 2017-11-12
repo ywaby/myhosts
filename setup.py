@@ -9,8 +9,8 @@ from setuptools import setup
 setup(
     name='myhosts',
     description='myhosts,hosts manager tool',
-    version='0.1.1',
-    license='LGPL-3.0',
+    version='0.2.1',
+    license='MIT',
     author='ywaby',
     author_email='ywaby@163.com',
     url='https://github.com/ywaby/myhosts',
@@ -27,4 +27,7 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Intended Audience :: System Administrators',
         'Topic :: Software Development :: hosts manager',
-    ], )
+    ],
+    data_files=[('/usr/local/configs/myhosts', ['configure/actions.py',
+                               'configure/configure.py'])]
+)

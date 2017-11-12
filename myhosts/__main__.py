@@ -1,12 +1,19 @@
 import platform
-import os,sys
+import os
+import sys
 import argparse
-from . import configure
-from . import actions
-from .base_action import BaseAction
 from inspect import getmembers
 
+# conf_path = "/home/ywaby/文档/project/python/myhosts/myhosts/configure"
+conf_path = "/usr/local/configs/myhosts"
+sys.path.append(conf_path)
+import actions
+from .base_action import BaseAction
+
+
 class CommandLine():
+    def init(self):
+        pass
 
     def prase(self):
         """Run the myhosts command line"""
@@ -17,7 +24,7 @@ class CommandLine():
                             "--version",
                             help="print myhosts version",
                             action='version',
-                            version='%(prog)s 0.1.1')
+                            version='%(prog)s 0.2.1')
         parser.add_argument('-i',
                             "--info",
                             help="show myhosts refence info",
@@ -31,16 +38,8 @@ class CommandLine():
                             help="action to run,Default to run if no set")
         args = parser.parse_args()
         if args.info:
-            print('configure path: %s' % os.path.dirname(configure.__file__))
-            if platform.system() == 'Windows':
-                sys_root_path = os.getenv("SystemRoot")
-                sys_hosts_path = os.path.join(
-                    sys_root_path, r"System32\drivers\etc\hosts")
-            elif platform.system() == 'Linux':
-                sys_hosts_path = '/etc/hosts'
-            else:
-                sys_hosts_path = '/etc/hosts'
-            print('hosts path: %s' % sys_hosts_path)
+            print(f'configure path: {conf_path}')
+            print(f'hosts path: {BaseAction.hosts_path}')
         elif args.list:
             print("actions in myhosts")
             print()
@@ -52,13 +51,14 @@ class CommandLine():
     def list_actions(self):
         '''list all tasks in files'''
         for name, action in getmembers(actions, BaseAction.is_action):
-            print(name, " : ", action.__doc__)
+            print(name, ":", action.__doc__)
             print()
 
 
 def main():
     CommandLine().prase()
     return True
+
 
 if __name__ == '__main__':
     main()
