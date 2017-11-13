@@ -8,11 +8,8 @@ class purge(BaseNode):
     """
 
     def action(self):
-        system('python -m myhosts -h')
-        system('python -m myhosts -v')
-        system('python -m myhosts -i')
-        system('python -m myhosts -l')
-        system('python -m myhosts Test')
+        system('sudo pip3 uninstall myhosts')
+        pass
 
 class test(BaseNode):
     """
@@ -20,36 +17,11 @@ class test(BaseNode):
     """
 
     def action(self):
-        system('python -m myhosts -h')
-        system('python -m myhosts -v')
-        system('python -m myhosts -i')
-        system('python -m myhosts -l')
-        system('python -m myhosts Test')
-
-class UpdateFromPip(BaseNode):
-    """
-    upgrade myhosts from pip
-    """
-
-    def action(self):
-        from myhosts import actions
-        from myhosts import configure
-        cfg_src = actions.__file__
-        actions_src = configure.__file__
-        home = path.expanduser('~')
-        cfg_bak = path.join(home, path.basename(cfg_src))
-        actions_bak = path.join(home, path.basename(actions_src))
-        copyfile(cfg_src, cfg_bak)
-        copyfile(actions_src, actions_bak)
-        del actions
-        del configure
-        system('pip upgrade myhosts')
-        from myhosts import actions
-        from myhosts import configure
-        cfg_src = actions.__file__
-        actions_src = configure.__file__
-        move(actions_bak, actions_src)
-        move(cfg_bak, cfg_src)
+        system('python3 -m myhosts -h')
+        system('python3 -m myhosts -v')
+        system('python3 -m myhosts -i')
+        system('python3 -m myhosts -l')
+        system('sudo python3 -m myhosts Test')
 
 class Uninstall(BaseNode):
 

@@ -1,6 +1,19 @@
 import platform
 import os
+import sys
 from urllib import request as urlrequest
+if platform.system() == 'Windows':
+    sys_root_path = os.getenv("SystemRoot")
+    hosts_path = os.path.join(
+        sys_root_path, r"System32\drivers\etc\hosts")
+elif platform.system() == "Linux":
+    hosts_path = '/etc/hosts'
+else:
+    raise Exception('unsupport system')
+conf_path = "/usr/local/configs/myhosts"
+sys.path.append(conf_path)
+
+
 from configure import Configure
 
 
@@ -8,14 +21,6 @@ class BaseAction():
     '''action base class'''
 
     def __init__(self):
-        if platform.system() == 'Windows':
-            sys_root_path = os.getenv("SystemRoot")
-            BaseAction.hosts_path = os.path.join(
-                sys_root_path, r"System32\drivers\etc\hosts")
-        elif platform.system() == "Linux":
-            BaseAction.hosts_path = '/etc/hosts'
-        else:
-            raise Exception('unsupport system')
         self.action()
 
     def action(self):
@@ -73,7 +78,7 @@ class BaseAction():
                          (hosts_type, src)).encode('utf-8')
             else:
                 raise Exception('action source hosts type error')
-        sys_hosts = open(BaseAction.hosts_path, mode='wb+')
+        sys_hosts = open(hosts_path, mode='wb+')
         sys_hosts.write(data)
         sys_hosts.close()
         if platform.system() == 'Windows':
@@ -81,7 +86,7 @@ class BaseAction():
         print('finish hosts update')
 
     def clear(self):
-        sys_hosts = open(BaseAction.hosts_path, mode='w')
+        sys_hosts = open(hosts_path, mode='w')
         sys_hosts.close()
         print("finish clear hosts")
         return
@@ -97,7 +102,7 @@ class BaseAction():
             name = "hosts" + \
                 time.strftime(" %Y-%m-%d %H-%M-%S", time.localtime())
         backup_path = os.path.join(path, name)
-        shutil.copyfile(BaseAction.hosts_path, backup_path)
+        shutil.copyfile(hosts_path, backup_path)
         print('hosts backup: ' + backup_path)
 
     @staticmethod

@@ -3,13 +3,8 @@ import os
 import sys
 import argparse
 from inspect import getmembers
-
-# conf_path = "/home/ywaby/文档/project/python/myhosts/myhosts/configure"
-conf_path = "/usr/local/configs/myhosts"
-sys.path.append(conf_path)
 import actions
-from .base_action import BaseAction
-
+from .base_action import conf_path,hosts_path,BaseAction
 
 class CommandLine():
     def init(self):
@@ -39,7 +34,7 @@ class CommandLine():
         args = parser.parse_args()
         if args.info:
             print(f'configure path: {conf_path}')
-            print(f'hosts path: {BaseAction.hosts_path}')
+            print(f'hosts path: {hosts_path}')
         elif args.list:
             print("actions in myhosts")
             print()
