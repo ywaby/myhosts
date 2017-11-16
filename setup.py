@@ -28,5 +28,5 @@ setup(
         'Intended Audience :: System Administrators',
         'Topic :: Software Development :: hosts manager',
     ],
-    package_data = {'myhosts': ['configure/*']}
+    package_data={'myhosts': ['configure/*']}
 )

@@ -1,15 +1,18 @@
+'''docstring
+'''
 import platform
 import os
 from urllib import request as urlrequest
+from configure import Configure
+
 if platform.system() == 'Windows':
-    sys_root_path = os.getenv("SystemRoot")
-    hosts_path = os.path.join(
-        sys_root_path, r"System32\drivers\etc\hosts")
+    HOSTS_PATH = os.path.join(os.getenv("SystemRoot"),
+                              r"System32\drivers\etc\hosts")
 elif platform.system() == "Linux":
-    hosts_path = '/etc/hosts'
+    HOSTS_PATH = '/etc/hosts'
 else:
     raise Exception('unsupport system')
-from configure import Configure
+
 
 class BaseAction():
     '''action base class'''
@@ -72,31 +75,33 @@ class BaseAction():
                          (hosts_type, src)).encode('utf-8')
             else:
                 raise Exception('action source hosts type error')
-        sys_hosts = open(hosts_path, mode='wb+')
+        sys_hosts = open(HOSTS_PATH, mode='wb+')
         sys_hosts.write(data)
         sys_hosts.close()
         if platform.system() == 'Windows':
             os.system('ipconfig /flushdns')
         print('finish hosts update')
 
-    def clear(self):
-        sys_hosts = open(hosts_path, mode='w')
+    @staticmethod
+    def clear():
+        sys_hosts = open(HOSTS_PATH, mode='w')
         sys_hosts.close()
         print("finish clear hosts")
         return
 
-    def backup(self, path=None, name=None):
+    @staticmethod
+    def backup(path=None, name=None):
         '''backup system hosts to path'''
         import shutil
         import time
-        if not conf_pathpath:
+        if not path:
             path = Configure.backup_path if hasattr(
                 Configure, 'backup_path') else ''
         if not name:
             name = "hosts" + \
                 time.strftime(" %Y-%m-%d %H-%M-%S", time.localtime())
         backup_path = os.path.join(path, name)
-        shutil.copyfile(hosts_path, backup_path)
+        shutil.copyfile(HOSTS_PATH, backup_path)
         print('hosts backup: ' + backup_path)
 
     @staticmethod
@@ -108,7 +113,6 @@ class BaseAction():
                BaseAction in inspect.getmro(obj) and \
                obj != BaseAction:
                 return True
-            else:
-                return False
+            return False
         except:
             return False
