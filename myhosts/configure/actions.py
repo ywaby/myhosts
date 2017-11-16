@@ -1,4 +1,4 @@
-
+'''doc'''
 from myhosts.base_action import BaseAction
 
 

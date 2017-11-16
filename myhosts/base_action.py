@@ -1,6 +1,5 @@
 import platform
 import os
-import sys
 from urllib import request as urlrequest
 if platform.system() == 'Windows':
     sys_root_path = os.getenv("SystemRoot")
@@ -10,12 +9,7 @@ elif platform.system() == "Linux":
     hosts_path = '/etc/hosts'
 else:
     raise Exception('unsupport system')
-conf_path = "/usr/local/configs/myhosts"
-sys.path.append(conf_path)
-
-
 from configure import Configure
-
 
 class BaseAction():
     '''action base class'''
@@ -95,7 +89,7 @@ class BaseAction():
         '''backup system hosts to path'''
         import shutil
         import time
-        if not path:
+        if not conf_pathpath:
             path = Configure.backup_path if hasattr(
                 Configure, 'backup_path') else ''
         if not name:

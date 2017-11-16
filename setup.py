@@ -28,6 +28,5 @@ setup(
         'Intended Audience :: System Administrators',
         'Topic :: Software Development :: hosts manager',
     ],
-    data_files=[('/usr/local/configs/myhosts', ['configure/actions.py',
-                               'configure/configure.py'])]
+    package_data = {'myhosts': ['configure/*']}
 )

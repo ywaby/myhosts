@@ -92,3 +92,5 @@ class ActionName(BaseAction):
 - conf at home
 - android test
 - pip package
+- use unittest
+- use as a lib

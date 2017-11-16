@@ -1,6 +1,6 @@
 from os import path, system
 from pytk import BaseNode
-from shutil import copyfile, move
+from shutil import copyfile, move,rmtree
 
 class purge(BaseNode):
     """
@@ -24,6 +24,17 @@ class test(BaseNode):
         system('sudo python3 -m myhosts Test')
 
 class Uninstall(BaseNode):
+    def checker(self):
+        '''judge whele to run action'''
+        Clear()
+        return True
 
     def action(self):
         system('pip uninstall myhosts')
+
+class Clear(BaseNode):
+    '''clear configure files'''
+    def action(self):
+        conf_path = path.expanduser("~/.config/myhosts")
+        if path.exists(conf_path):
+            rmtree(conf_path)

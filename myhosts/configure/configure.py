@@ -1,4 +1,5 @@
 # coding:utf-8
+# test hosts upgrade
 class Configure():
     '''configure of myhost'''
     # remote download timeout set

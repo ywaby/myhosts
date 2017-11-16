@@ -1,10 +1,25 @@
+import os
+import shutil
+import sys
+
+conf_path = os.path.expanduser("~/.config/myhosts")
+if not os.path.exists(conf_path):
+    os.mkdir(conf_path)
+if not os.path.exists(f"{conf_path}/configure.py"):
+    src = os.path.join(os.path.dirname(__file__), "configure/configure.py")
+    shutil.copyfile(src, f"{conf_path}/configure.py")
+if not os.path.exists(f"{conf_path}/actions.py"):
+    src = os.path.join(os.path.dirname(__file__), "configure/actions.py")
+    shutil.copyfile(src, f"{conf_path}/actions.py")
+sys.path.append(conf_path)
+
 import platform
 import os
 import sys
 import argparse
 from inspect import getmembers
+from .base_action import hosts_path,BaseAction
 import actions
-from .base_action import conf_path,hosts_path,BaseAction
 
 class CommandLine():
     def init(self):
