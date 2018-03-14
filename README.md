@@ -32,7 +32,7 @@ positional arguments:
 optional arguments:
   -h, --help     show this help message and exit
   -v, --version  print myhosts version
-  -i, --info     show myhosts refence info
+  -i, --info     show myhosts reference info
   -l, --list     list all actions
 ```
 
@@ -78,19 +78,17 @@ class ActionName(BaseAction):
 
     def execute(self):
         # backup hosts
-        self.backup(r"E:\develop_space\python\myhosts\test")
+        BaseAction.backup(r"E:\develop_space\python\myhosts\test")
         # update hosts from list
         self.update(
             ('remote_hosts', 'ipv4 hosts'),
             ('local_hosts', 'github hosts')
         )
         # clear hosts file
-        self.clear()
+        BaseAction.clear()
 ```
 
 ## Roadmap
-- conf at home
-- android test
-- pip package
-- use unittest
 - use as a lib
+- pip package
+- 

@@ -1,14 +1,13 @@
 '''docstring
 '''
-import platform
 import os
 from urllib import request as urlrequest
 from configure import Configure
 
-if platform.system() == 'Windows':
+if os.name == 'nt':
     HOSTS_PATH = os.path.join(os.getenv("SystemRoot"),
                               r"System32\drivers\etc\hosts")
-elif platform.system() == "Linux":
+elif os.name == "posix":
     HOSTS_PATH = '/etc/hosts'
 else:
     raise Exception('unsupport system')
@@ -78,7 +77,7 @@ class BaseAction():
         sys_hosts = open(HOSTS_PATH, mode='wb+')
         sys_hosts.write(data)
         sys_hosts.close()
-        if platform.system() == 'Windows':
+        if os.name == 'nt':
             os.system('ipconfig /flushdns')
         print('finish hosts update')
 

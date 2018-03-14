@@ -2,7 +2,7 @@ from os import path, system
 from shutil import rmtree
 from pytk import BaseNode
 
-class TestAll(BaseNode):
+class test_all(BaseNode):
     """
     test myhosts auto
     """
@@ -15,17 +15,18 @@ class TestAll(BaseNode):
         system('sudo python3 -m myhosts Test')
 
 
-class Uninstall(BaseNode):
-    def checker(self):
-        '''judge whele to run action'''
-        Clear()
-        return True
+class link_conf(BaseNode):
 
     def action(self):
-        system('pip uninstall myhosts')
+        project_path = os.path.dirname(__file__)
+        src = os.path.join(project_path, "./myhosts/configure")
+        link = os.path.abspath(src)
+        target = "~/.config/myhosts")
+        if os.path.exists(target):
+            os.rmdir(target)
+        os.symlink(link, target)
 
-
-class Clear(BaseNode):
+class clear_conf(BaseNode):
     '''clear configure files'''
 
     def action(self):

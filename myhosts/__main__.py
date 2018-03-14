@@ -9,11 +9,13 @@ CONF_PATH = os.path.expanduser("~/.config/myhosts")
 if not os.path.exists(CONF_PATH):
     os.mkdir(CONF_PATH)
 if not os.path.exists(f"{CONF_PATH}/configure.py"):
-    shutil.copyfile(os.path.join(os.path.dirname(__file__), "configure/configure.py"),
-                    f"{CONF_PATH}/configure.py")
+    shutil.copyfile(os.path.join(os.path.dirname(__file__),
+                                 "configure/configure.py"),
+                                f"{CONF_PATH}/configure.py")
 if not os.path.exists(f"{CONF_PATH}/actions.py"):
-    shutil.copyfile(os.path.join(os.path.dirname(__file__), "configure/actions.py"),
-                    f"{CONF_PATH}/actions.py")
+    shutil.copyfile(os.path.join(os.path.dirname(__file__),
+                                 "configure/actions.py"),
+                                f"{CONF_PATH}/actions.py")
 sys.path.append(CONF_PATH)
 
 
@@ -40,7 +42,7 @@ def cmd_prase():
                         version='%(prog)s 0.2.1')
     parser.add_argument('-i',
                         "--info",
-                        help="show myhosts refence info",
+                        help="show myhosts reference info",
                         action='store_true')
     parser.add_argument('-l', "--list",
                         help="list all actions",
