@@ -1,24 +1,26 @@
 myhosts is a hosts manager tool base on python3.  
-myhosts can updata hosts from remote & local.  
+myhosts can updata hosts from remote & local files.  
 myhosts can be used to switch hosts between diffrent scene.
 
-## License 
 project is under [MIT](./LICENSE)
 
-## Usage
 
 ### Install
 from source code
 ```shell
-python setup.py install
+sudo python setup.py install
 ```
 
-### Uninstall
+uninstall
 ```sh
 pip uninstall myhosts
 # remove configure file
-rm  -rf ~/config/myhosts
+rm  ~/.config/myhosts.config.json
 ```
+
+
+
+## Usage
 
 ### Command Reference
 please used under sudo, if need to change system hosts.
@@ -27,69 +29,59 @@ please used under sudo, if need to change system hosts.
 usage: myhosts [-h] [-v] [-i] [-l] [action]
 
 positional arguments:
-  action         action to run,default to run if no set
+  action         action to run,default action if unset
 
 optional arguments:
   -h, --help     show this help message and exit
   -v, --version  print myhosts version
-  -i, --info     show myhosts reference info
   -l, --list     list all actions
 ```
 
-### Configure
-find path
-```shell
-myhosts -i
-```
-
-configure.py 
-```py
-
-class Configure():
-    '''configure of myhost'''
-    # remote download timeout set
-    timeout = 30
-    # set proxy,if not use proxy,do not set it
-    proxy = {
-        # "http": "127.0.0.1:8087",
-        # "https": "127.0.0.1:8087"
-    }
-    # set remote hosts link
-    remote_hosts = {
-        # 'hosts name': link
-        'ipv4 hosts': 'https://raw.githubusercontent.com/racaljk/hosts/master/hosts',
-        'ipv6 hosts': 'https://github.com/lennylxx/ipv6-hosts'
-    }
-    # set local hosts file path
-    local_hosts = {
-        # 'hosts name': path
-        'github hosts': '/home/ywaby/文档/project/python/myhosts/test/add_hosts'
-    }
-    # default path to backup,save to current path if not set
-    backup_path = ''
-
-```
-
-### Action
-actions.py
-```py
-class ActionName(BaseAction):
-    '''doc of action'''
-
-    def execute(self):
-        # backup hosts
-        BaseAction.backup(r"E:\develop_space\python\myhosts\test")
-        # update hosts from list
-        self.update(
-            ('remote_hosts', 'ipv4 hosts'),
-            ('local_hosts', 'github hosts')
-        )
-        # clear hosts file
-        BaseAction.clear()
+### configure
+~/.config/myhosts.config.json
+```json
+{
+    "actions": {
+        "default": {
+            "note": "default action",
+            "update": [
+                "ipv4 gfw",
+                "local hosts"
+            ],
+            "backup": true,
+            "clear": true
+        },
+        "test": {
+            "note": "",
+            "update": [
+                "ipv4 gfw",
+                "local hosts"
+            ],
+            "backup": true,
+            "clear": false
+        },
+        "clear": {
+            "note": "",
+            "backup": true,
+            "clear": true
+        }
+    },
+    "timeout": 30,
+    "proxy": {
+        "http": "127.0.0.1:8087",
+        "https": "127.0.0.1:8087"
+    },
+    "hosts": {
+        "ipv4 gfw": "https://raw.githubusercontent.com/racaljk/hosts/master/hosts",
+        "ipv6 gfw": "https://github.com/lennylxx/ipv6-hosts",
+        "local hosts": "./test/extra_hosts"
+    },
+    "backup_path": "./test/backup"
+}
 ```
 
 ## Roadmap
-- configure to json action to ~/.config/myhosts
 - use as a lib
 - pipy
-- 
+- docs
+- support ssh
