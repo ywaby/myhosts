@@ -89,6 +89,7 @@ class ActionName(BaseAction):
 ```
 
 ## Roadmap
+- configure to json action to ~/.config/myhosts
 - use as a lib
-- pip package
+- pipy
 - 

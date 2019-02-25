@@ -5,18 +5,19 @@ myhosts can be used to switch hosts between diffrent scene.
 project at "https://github.com/ywaby/myhosts"
 """
 from setuptools import setup
+from os.path import expanduser
 
 setup(
     name='myhosts',
-    description='myhosts,hosts manager tool',
-    version='0.2.1',
+    description='hosts manager tool',
+    version='0.2.0',
     license='MIT',
     author='ywaby',
-    author_email='ywaby@163.com',
+    author_email='ywabygl@gmail.com',
     url='https://github.com/ywaby/myhosts',
     keywords="hosts manager tool",
-    packages=['myhosts'],
-    entry_points={'console_scripts': ['myhosts = myhosts.__main__:main']},
+    py_modules=['myhosts'],
+    entry_points={'console_scripts': ['myhosts = myhosts:main']},
     classifiers=[
         'Development Status :: 3 - Apah',
         'Environment :: Console',
@@ -28,5 +29,5 @@ setup(
         'Intended Audience :: System Administrators',
         'Topic :: Software Development :: hosts manager',
     ],
-    package_data={'myhosts': ['configure/*']}
+    data_files=[(expanduser('~/.config'), ['myhosts.config.json'])]
 )
