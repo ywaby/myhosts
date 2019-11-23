@@ -15,7 +15,7 @@ uninstall
 ```sh
 pip uninstall myhosts
 # remove configure file
-rm  ~/.config/myhosts.config.json
+rm  ~/.config/config.json
 ```
 
 
@@ -38,7 +38,7 @@ optional arguments:
 ```
 
 ### configure
-~/.config/myhosts.config.json
+~/.config/config.json
 ```json
 {
     "actions": {
@@ -49,7 +49,7 @@ optional arguments:
                 "local hosts"
             ],
             "backup": true,
-            "clear": true
+            "clear": false
         },
         "test": {
             "note": "",
@@ -62,6 +62,7 @@ optional arguments:
         },
         "clear": {
             "note": "",
+            "update": [],
             "backup": true,
             "clear": true
         }
@@ -72,16 +73,10 @@ optional arguments:
         "https": "127.0.0.1:8087"
     },
     "hosts": {
-        "ipv4 gfw": "https://raw.githubusercontent.com/racaljk/hosts/master/hosts",
+        "ipv4 gfw": "https://coding.net/u/scaffrey/p/hosts/git/raw/master/hosts-files/hosts",
         "ipv6 gfw": "https://github.com/lennylxx/ipv6-hosts",
-        "local hosts": "./test/extra_hosts"
+        "local hosts": "~/.config/myhosts/extra_hosts"
     },
-    "backup_path": "./test/backup"
+    "backup_path": "~/.config/myhosts/backup"
 }
 ```
-
-## Roadmap
-- use as a lib
-- pipy
-- docs
-- support ssh
