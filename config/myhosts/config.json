@@ -7,7 +7,7 @@
                 "local hosts"
             ],
             "backup": true,
-            "clear": true
+            "clear": false
         },
         "test": {
             "note": "",
@@ -20,6 +20,7 @@
         },
         "clear": {
             "note": "",
+            "update": [],
             "backup": true,
             "clear": true
         }
@@ -30,9 +31,9 @@
         "https": "127.0.0.1:8087"
     },
     "hosts": {
-        "ipv4 gfw": "https://raw.githubusercontent.com/racaljk/hosts/master/hosts",
+        "ipv4 gfw": "https://coding.net/u/scaffrey/p/hosts/git/raw/master/hosts-files/hosts",
         "ipv6 gfw": "https://github.com/lennylxx/ipv6-hosts",
-        "local hosts": "./test/extra_hosts"
+        "local hosts": "~/.config/myhosts/extra_hosts"
     },
-    "backup_path": "./test/backup"
+    "backup_path": "~/.config/myhosts/backup"
 }

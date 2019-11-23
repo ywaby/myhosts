@@ -29,5 +29,9 @@ setup(
         'Intended Audience :: System Administrators',
         'Topic :: Software Development :: hosts manager',
     ],
-    data_files=[(expanduser('~/.config'), ['myhosts.config.json'])]
+    data_files=[
+        (expanduser('~/.config/myhosts'), ['config/myhosts/config.json']),
+        (expanduser('~/.config/myhosts'), ['config/myhosts/extra_hosts'])
+        # (expanduser('~/.config/myhosts'), ['config/myhosts/backup'])
+    ]
 )

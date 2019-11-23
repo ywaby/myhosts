@@ -4,13 +4,15 @@ import argparse
 from urllib import request as urlrequest
 import time
 
-config={}
-with open(os.path.expanduser('~/.config/myhosts.config.json'), 'r') as fp:
+config_path = "~/.config/myhosts/config.json"
+config = {}
+with open(os.path.expanduser(config_path), 'r') as fp:
     config = json.load(fp)
 
-HOSTS_PATH=""
+HOSTS_PATH = ""
 if os.name == 'nt':
-    HOSTS_PATH = os.path.join(os.getenv("SystemRoot"),r"System32\drivers\etc\hosts")
+    HOSTS_PATH = os.path.join(os.getenv("SystemRoot"),
+                              r"System32\drivers\etc\hosts")
 elif os.name == "posix":
     HOSTS_PATH = '/etc/hosts'
 else:
@@ -18,11 +20,13 @@ else:
 
 def _get_hosts(url):
     if '://' not in url:
+        url=os.path.expanduser(url)
         url = "file://"+(os.path.abspath(url))
     req = urlrequest.Request(url)
     response = urlrequest.urlopen(req, timeout=config["timeout"])
     data = response.read()
     return data
+
 
 def clear():
     sys_hosts = open(HOSTS_PATH, mode='w')
@@ -30,24 +34,29 @@ def clear():
     print("finish clear hosts")
     return
 
-def backup(path=None, name=None):
+
+def backup(path:str=None, name=None):
     '''backup system hosts to path'''
     import shutil
     if not path:
         path = config["backup_path"]
+        path=os.path.expanduser(path)
     if not name:
         name = "hosts" + \
             time.strftime(" %Y-%m-%d %H-%M-%S", time.localtime())
+    if not os.path.exists(path):
+        os.mkdir(path)
     backup_path = os.path.join(path, name)
     shutil.copyfile(HOSTS_PATH, backup_path)
     print('hosts backup: ' + backup_path)
+
 
 def update(srcs):
     '''update hosts from sources'''
     data = b''
     tim = time.strftime(" %Y-%m-%d %H-%M-%S", time.localtime())
     data += (f'# update time:{tim}\n\n').encode('utf-8')
-    
+
     for src in srcs:
         url = config['hosts'][src]
         print(f'getting {src}:{url}')
@@ -61,6 +70,7 @@ def update(srcs):
         os.system('ipconfig /flushdns')
     print('finish hosts update')
 
+
 def exec_action(action_name):
     if action_name not in config["actions"]:
         print(f'action {action_name} not exist')
@@ -73,12 +83,12 @@ def exec_action(action_name):
     if action['clear']:
         clear()
 
+
 def list_actions(actions):
     '''list all actions in files'''
-    for key,action in actions.items():
-        print(key, ":",action['note'])
+    for key, action in actions.items():
+        print(key, ":", action['note'])
     print()
-
 
 
 def cli_prase():
@@ -107,6 +117,7 @@ def cli_prase():
         list_actions(config['actions'])
     else:
         exec_action(args.action)
+
 
 def main():
     cli_prase()
